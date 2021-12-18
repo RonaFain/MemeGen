@@ -54,11 +54,14 @@ h5,
 h6 {
   margin: 0;
   padding: 0;
-  font-family: mont-bold;
+  /* font-family: mont-bold; */
+  font-family: mont;
+  font-weight: bold;
 }
 
 small {
-  font-family: mont-thin;
+  /* font-family: mont-thin; */
+  font-family: mont;
 }
 
 /* Layout */
@@ -273,7 +276,9 @@ small {
   border: none;
   background-color: transparent;
   font-size: 1.1rem;
-  font-family: mont-bold;
+  /* font-family: mont-bold; */
+  font-family: mont;
+  font-weight: bold;
   padding: 0 10px;
   cursor: pointer;
 }
@@ -289,7 +294,9 @@ small {
 .btn-container li button {
   padding: 10px;
   font-size: 0.9rem;
-  font-family: mont-bold;
+  /* font-family: mont-bold; */
+  font-family: mont;
+  font-weight: bold;
 }
 
 .gallery-container .search-fillter {
@@ -326,7 +333,9 @@ small {
 .fillter-container .btn-more {
   cursor: pointer;
   color: #ff7f00;
-  font-family: mont-bold;
+  /* font-family: mont-bold; */
+  font-family: mont;
+  font-weight: bold;
 }
 
 .gallery-container .images-container,
@@ -373,7 +382,9 @@ small {
 }
 
 .btn-upload:hover {
-  font-family: mont-bold;
+  /* font-family: mont-bold; */
+  font-family: mont;
+  font-weight: bold;
 }
 
 .gallery-container .contact-main {
@@ -453,7 +464,8 @@ small {
 }
 
 .footer-logo {
-  font-family: mont-bold;
+  /* font-family: mont-bold; */
+  font-family: mont;
   font-weight: bold;
   font-size: 1.5rem;
   padding-top: 75px;
@@ -596,7 +608,9 @@ body.menu-open .main-screen {
   width: 30%;
   height: 30px;
   margin: 20px;
-  font-family: mont-bold;
+  /* font-family: mont-bold; */
+  font-family: mont;
+  font-weight: bold;
 }
 
 .img-modal-container button:hover {
@@ -714,7 +728,9 @@ body.menu-open .main-screen {
   }
 
   .main-header .main-nav a.active {
-    font-family: mont-bold;
+    /* font-family: mont-bold; */
+    font-family: mont;
+    font-weight: bold;
     color: black;
     padding: 18px;
     box-sizing: content-box;
