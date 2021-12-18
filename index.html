@@ -12,17 +12,33 @@
     <div class="main-screen" onclick="onToggleMenu()"></div>
     <header class="main-header">
       <div class="header-container main-layout flex space-between align-center">
-        <div class="logo">memegen</div>
+        <div class="logo">memegen
+          <select class="select-lang" onchange="onSetLang(this.value)">
+            <option value="en">English</option>
+            <option value="he">עברית</option>
+          </select>
+        </div>
+        
         <nav class="main-nav">
           <ul class="clean-list flex">
             <li>
-              <a href="#" class="btn-gallery active" onclick="onOpenPage('gallery')">Gallery</a>
+              <a
+                href="#"
+                class="btn-gallery active"
+                onclick="onOpenPage('gallery')"
+                data-trans="nav-gallery"
+                >Gallery</a
+              >
             </li>
             <li>
-              <a href="#" class="btn-memes" onclick="onOpenPage('memes')">Memes</a>
+              <a href="#" class="btn-memes" onclick="onOpenPage('memes')" data-trans="nav-memes"
+                >Memes</a
+              >
             </li>
             <li>
-              <a href="#" class="btn-about" onclick="onOpenPage('about')">About</a>
+              <a href="#" class="btn-about" onclick="onOpenPage('about')" data-trans="nav-about"
+                >About</a
+              >
             </li>
           </ul>
         </nav>
@@ -50,37 +66,77 @@
             autofocus
             autocomplete="off"
           />
-          <button class="btn btn-up" onclick="onMoveLine('up')" title="Move line up">
+          <button
+            class="btn btn-up"
+            onclick="onMoveLine('up')"
+            title="Move line up"
+          >
             <img src="icons/up.png" />
           </button>
-          <button class="btn btn-down" onclick="onMoveLine('down')" title="Move line down">
+          <button
+            class="btn btn-down"
+            onclick="onMoveLine('down')"
+            title="Move line down"
+          >
             <img src="icons/down.png" />
           </button>
-          <button class="btn btn-upanddown" onclick="onChangeLine()" title="Switch between text lines">
+          <button
+            class="btn btn-upanddown"
+            onclick="onChangeLine()"
+            title="Switch between text lines"
+          >
             <img src="icons/up-and-down.png" />
           </button>
-          <button class="btn btn-add-line tooltip" onclick="onAddLine()" title="Add text line">
+          <button
+            class="btn btn-add-line tooltip"
+            onclick="onAddLine()"
+            title="Add text line"
+          >
             <img src="icons/add.png" />
-            <span class="tooltiptext"> &nbsp;First: add a new line</span>
+            <span class="tooltiptext" data-trans="tooltip"> &nbsp;First: add a new line</span>
           </button>
-          <button class="btn btn-remove-line" onclick="onRemoveLine()" title="Delete text line">
+          <button
+            class="btn btn-remove-line"
+            onclick="onRemoveLine()"
+            title="Delete text line"
+          >
             <img src="icons/trash.png" />
           </button>
         </section>
         <section class="style-box grid">
-          <button class="btn btn-increase" onclick="onChangeFontSize(5)" title="Increase font size">
+          <button
+            class="btn btn-increase"
+            onclick="onChangeFontSize(5)"
+            title="Increase font size"
+          >
             <img src="icons/increase-font.png" />
           </button>
-          <button class="btn btn-decrease" onclick="onChangeFontSize(-5)" title="Decrease font size">
+          <button
+            class="btn btn-decrease"
+            onclick="onChangeFontSize(-5)"
+            title="Decrease font size"
+          >
             <img src="icons/decrease-font.png" />
           </button>
-          <button class="btn btn-align-left" onclick="onChangeAlign('left')" title="Align left">
+          <button
+            class="btn btn-align-left"
+            onclick="onChangeAlign('left')"
+            title="Align left"
+          >
             <img src="icons/align-to-left.png" />
           </button>
-          <button class="btn btn-align-center" onclick="onChangeAlign('center')" title="Align center">
+          <button
+            class="btn btn-align-center"
+            onclick="onChangeAlign('center')"
+            title="Align center"
+          >
             <img src="icons/align-to-center.png" />
           </button>
-          <button class="btn btn-align-right" onclick="onChangeAlign('right')" title="Align right">
+          <button
+            class="btn btn-align-right"
+            onclick="onChangeAlign('right')"
+            title="Align right"
+          >
             <img src="icons/align-to-right.png" />
           </button>
           <select
@@ -123,7 +179,7 @@
         <section class="btns-box">
           <ul class="btn-container clean-list flex justify-center">
             <li>
-              <button class="btn btn-save" onclick="onSaveMeme(this)">
+              <button class="btn btn-save" onclick="onSaveMeme(this)" data-trans="btn-save">
                 Save
               </button>
             </li>
@@ -133,15 +189,23 @@
                 href="#"
                 onclick="onDownloadMeme(this)"
                 download="my-meme.jpg"
-                ><button class="btn">Download</button></a
+                ><button class="btn" data-trans="btn-download">Download</button></a
               >
             </li>
             <li>
-              <button class="btn btn-share" onclick="onShareMeme()">
+              <button class="btn btn-share" onclick="onShareMeme()" data-trans="btn-share">
                 Share
               </button>
             </li>
-            <li><button class="btn btn-remove-sticker" onclick="onRemoveSticker()">Delete sticker</button></li>
+            <li>
+              <button
+                class="btn btn-remove-sticker"
+                onclick="onRemoveSticker()"
+                data-trans="btn-delete-sticker"
+              >
+                Delete sticker
+              </button>
+            </li>
           </ul>
         </section>
       </div>
@@ -166,6 +230,7 @@
                 name="search"
                 placeholder="Enter search keyword"
                 autocomplete="off"
+                data-trans="search-placeholder"
               />
               <datalist id="search-words"></datalist>
               <button class="search-btn">
@@ -175,7 +240,15 @@
           </div>
           <div class="fillter-container flex align-center">
             <div>
-              <ul class="keywords-container clean-list flex align-center flex-wrap"></ul>
+              <ul
+                class="
+                  keywords-container
+                  clean-list
+                  flex
+                  align-center
+                  flex-wrap
+                "
+              ></ul>
             </div>
             <div class="btn-more" onclick="onToggleMore(this)">More...</div>
           </div>
@@ -194,16 +267,25 @@
         >
           <div class="contact-img"><img src="imgs/profile.PNG" /></div>
           <div class="contact-details">
-            <h2>Rona Fainshtein</h2>
-            <p>
+            <h2 data-trans="contact-title">Rona Fainshtein</h2>
+            <p data-trans="contact-body">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid
               nulla voluptatum sunt commodi quo asperiores porro ex, nam itaque
               at.
             </p>
             <ul class="social-nav clean-list flex justify-center">
-              <li><a class="fa linkedin" href="https://www.linkedin.com/in/rona-fainshtein"></a></li>
-              <li><a class="fa facebook" href="https://www.facebook.com/"></a></li>
-              <li><a class="fa github" href="https://github.com/RonaFain"></a></li>
+              <li>
+                <a
+                  class="fa linkedin"
+                  href="https://www.linkedin.com/in/rona-fainshtein"
+                ></a>
+              </li>
+              <li>
+                <a class="fa facebook" href="https://www.facebook.com/"></a>
+              </li>
+              <li>
+                <a class="fa github" href="https://github.com/RonaFain"></a>
+              </li>
             </ul>
           </div>
         </div>
@@ -224,8 +306,8 @@
           align-center
         "
       >
-        <h2>Hello !!</h2>
-        <p>This website created by Rona Fainshtein</p>
+        <h2 data-trans="about-title">Hello !!</h2>
+        <p data-trans="about-body">This website created by Rona Fainshtein</p>
         <img src="imgs/web-design-meme.jpg" />
       </section>
     </main>
@@ -241,7 +323,7 @@
         "
       >
         <div class="footer-logo">memegen</div>
-        <small>all rights reserved 2021 ©</small>
+        <small data-trans="footer-copyright">all rights reserved 2021 ©</small>
       </div>
     </footer>
 
@@ -249,17 +331,16 @@
       <span class="close-modal" onclick="onToggleModal()" title="Close">×</span>
       <div class="modal-container">
         <h2>Meme 😏</h2>
-        <p>Are you sure you want to save this meme?</p>
+        <p data-trans="modal-text">Are you sure you want to save this meme?</p>
         <div class="clearfix">
-          <button class="btn-yes" onclick="onSaveModal()">yes</button>
-          <button class="btn-no" onclick="onToggleModal()" >no</button>
+          <button class="btn-yes" onclick="onSaveModal()" data-trans="btn-yes">yes</button>
+          <button class="btn-no" onclick="onToggleModal()" data-trans="btn-no">no</button>
         </div>
       </div>
     </div>
 
-    
-
     <script src="js/service/utils.js"></script>
+    <script src="js/service/i18n-service.js"></script>
     <script src="js/service/meme-storage.js"></script>
     <script src="js/service/meme-service.js"></script>
     <script src="js/editor-controller.js"></script>

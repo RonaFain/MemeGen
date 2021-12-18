@@ -7,13 +7,14 @@ function onInit() {
   renderStickers();
   renderKeywords();
   renderGallery();
+  doTrans();
 }
 
 function renderGallery() {
   const imgs = getImgs();
   var strHtmls = `<div class="img-gallery" style="margin: auto;">
                     <input type="file" id="BtnUploadHidden" class="img-item file-input btn" name="image" onchange="onUploadImg(event)" style="display: none;"/>
-                    <label for="BtnUploadHidden" class="btn-upload" >Upload an image</label>
+                    <label for="BtnUploadHidden" class="btn-upload" data-trans="upload-img-text">Upload an image</label>
                   </div>`;
   strHtmls += imgs
     .map((img) => {
@@ -52,7 +53,7 @@ function renderKeywords() {
   let strHtmls = '';
   for (const word in keywords) {
     strHtmls += `
-    <li class="keyword"><a href="#" style="font-size: ${keywords[word]}px; margin-right:20px;"
+    <li class="keyword"><a href="#" style="font-size: ${keywords[word]}px;"
     onclick="onKeyFillter('${word}')">${word}</a></li>`;
   }
 
@@ -145,13 +146,13 @@ function onUploadImg(ev) {
 function onOpenImgModal(imgSrc, imgId) {
   const strHtml = `<div class="img-modal" data-id="${imgId}" onmouseleave="onLeaveModal(this)">
                       <div class="img-modal-container">
-                        <button class="delete-meme" onclick="onDeleteMeme('${imgId}')">Delete</button>
+                        <button class="delete-meme" onclick="onDeleteMeme('${imgId}')" data-trans="btn-delete">Delete</button>
                         <a
                         class="btn-download"
                         href="#"
                         onclick="onDownloadImg(this, '${imgSrc}', '${imgId}')"
                         download="my-meme.jpg"
-                        ><button class="btn">Download</button></a
+                        ><button class="btn" data-trans="btn-download">Download</button></a
                       >
                       </div>
                     </div>`;
@@ -161,6 +162,7 @@ function onOpenImgModal(imgSrc, imgId) {
   );
   elContainer.style.position = 'relative';
   elContainer.innerHTML += strHtml;
+  doTrans();
 }
 
 function onDownloadImg(elLink, src, id) {
@@ -175,6 +177,13 @@ function onLeaveModal(el) {
 function onDeleteMeme(memeId) {
   deleteMeme(memeId);
   renderMyMemes();
+}
+
+function onSetLang(lang) {
+  setLang(lang);
+  if (lang === 'he') document.body.classList.add('rtl');
+  else  document.body.classList.remove('rtl');
+  onInit();
 }
 
 function _moveToEditorPage() {
