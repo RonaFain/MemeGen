@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="icons/favicon.ico" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>MemeGen</title>
+  </head>
+  <body onload="onInit()">
+    <div class="main-screen" onclick="onToggleMenu()"></div>
+    <header class="main-header">
+      <div class="header-container main-layout flex space-between align-center">
+        <div class="logo">memegen</div>
+        <nav class="main-nav">
+          <ul class="clean-list flex">
+            <li>
+              <a href="#" class="btn-gallery active" onclick="onOpenPage('gallery')">Gallery</a>
+            </li>
+            <li>
+              <a href="#" class="btn-memes" onclick="onOpenPage('memes')">Memes</a>
+            </li>
+            <li>
+              <a href="#" class="btn-about" onclick="onOpenPage('about')">About</a>
+            </li>
+          </ul>
+        </nav>
+        <button class="btn-menu" onclick="onToggleMenu()">☰</button>
+      </div>
+    </header>
+
+    <main class="editor-container main-layout flex none">
+      <div class="canvas-container">
+        <canvas
+          class="canvas"
+          height="550px"
+          width="550px"
+          style="cursor: crosshair; letter-spacing: 2px"
+        ></canvas>
+      </div>
+      <div class="tools-container">
+        <section class="control-box grid">
+          <input
+            type="text"
+            name="line"
+            class="input-line self-center"
+            oninput="onSetLineTxt(this.value)"
+            title="Change line text"
+            autofocus
+            autocomplete="off"
+          />
+          <button class="btn btn-up" onclick="onMoveLine('up')" title="Move line up">
+            <img src="icons/up.png" />
+          </button>
+          <button class="btn btn-down" onclick="onMoveLine('down')" title="Move line down">
+            <img src="icons/down.png" />
+          </button>
+          <button class="btn btn-upanddown" onclick="onChangeLine()" title="Switch between text lines">
+            <img src="icons/up-and-down.png" />
+          </button>
+          <button class="btn btn-add-line tooltip" onclick="onAddLine()" title="Add text line">
+            <img src="icons/add.png" />
+            <span class="tooltiptext"> &nbsp;First: add a new line</span>
+          </button>
+          <button class="btn btn-remove-line" onclick="onRemoveLine()" title="Delete text line">
+            <img src="icons/trash.png" />
+          </button>
+        </section>
+        <section class="style-box grid">
+          <button class="btn btn-increase" onclick="onChangeFontSize(5)" title="Increase font size">
+            <img src="icons/increase-font.png" />
+          </button>
+          <button class="btn btn-decrease" onclick="onChangeFontSize(-5)" title="Decrease font size">
+            <img src="icons/decrease-font.png" />
+          </button>
+          <button class="btn btn-align-left" onclick="onChangeAlign('left')" title="Align left">
+            <img src="icons/align-to-left.png" />
+          </button>
+          <button class="btn btn-align-center" onclick="onChangeAlign('center')" title="Align center">
+            <img src="icons/align-to-center.png" />
+          </button>
+          <button class="btn btn-align-right" onclick="onChangeAlign('right')" title="Align right">
+            <img src="icons/align-to-right.png" />
+          </button>
+          <select
+            class="select-font-family btn"
+            onchange="onChangeFontFamily(this.value)"
+          >
+            <option value="impact">Impact</option>
+            <option value="comic">Comic</option>
+            <option value="times">Times new roman</option>
+            <option value="verdana">Verdana</option>
+          </select>
+          <button class="btn btn-stroke-color" title="Stroke color">
+            <img src="icons/stroke-color.png" />
+            <input
+              type="color"
+              name="stroke-color"
+              value="#ffffff"
+              onchange="onChangeColor('stroke', this.value)"
+            />
+          </button>
+          <button class="btn btn-font-color" title="Font color">
+            <img src="icons/font-color.png" />
+            <input
+              type="color"
+              name="font-color"
+              value="#ffffff"
+              onchange="onChangeColor('font', this.value)"
+            />
+          </button>
+        </section>
+        <section class="stickers-box flex space-between">
+          <button class="btn-arrow arrow-left" onclick="onSetStickersPage(-1)">
+            «
+          </button>
+          <div class="stickers-container flex"></div>
+          <button class="btn-arrow arrow-right" onclick="onSetStickersPage(1)">
+            »
+          </button>
+        </section>
+        <section class="btns-box">
+          <ul class="btn-container clean-list flex justify-center">
+            <li>
+              <button class="btn btn-save" onclick="onSaveMeme(this)">
+                Save
+              </button>
+            </li>
+            <li>
+              <a
+                class="btn-download"
+                href="#"
+                onclick="onDownloadMeme(this)"
+                download="my-meme.jpg"
+                ><button class="btn">Download</button></a
+              >
+            </li>
+            <li>
+              <button class="btn btn-share" onclick="onShareMeme()">
+                Share
+              </button>
+            </li>
+            <li><button class="btn btn-remove-sticker" onclick="onRemoveSticker()">Delete sticker</button></li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <main class="gallery-container">
+      <section class="search-fillter">
+        <div
+          class="
+            search-fillter-container
+            main-layout
+            flex flex-column
+            justify-center
+            align-center
+          "
+        >
+          <div class="search-container">
+            <form class="search-form" onchange="onSearch(event)">
+              <input
+                list="search-words"
+                class="search"
+                name="search"
+                placeholder="Enter search keyword"
+                autocomplete="off"
+              />
+              <datalist id="search-words"></datalist>
+              <button class="search-btn">
+                <img src="icons/search-icon.png" />
+              </button>
+            </form>
+          </div>
+          <div class="fillter-container flex align-center">
+            <div>
+              <ul class="keywords-container clean-list flex align-center flex-wrap"></ul>
+            </div>
+            <div class="btn-more" onclick="onToggleMore(this)">More...</div>
+          </div>
+        </div>
+      </section>
+      <section class="images-container main-layout grid"></section>
+      <section class="contact-main">
+        <div
+          class="
+            contact-container
+            main-layout
+            flex flex-column
+            justify-center
+            align-center
+          "
+        >
+          <div class="contact-img"><img src="imgs/profile.PNG" /></div>
+          <div class="contact-details">
+            <h2>Rona Fainshtein</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid
+              nulla voluptatum sunt commodi quo asperiores porro ex, nam itaque
+              at.
+            </p>
+            <ul class="social-nav clean-list flex justify-center">
+              <li><a class="fa linkedin" href="https://www.linkedin.com/in/rona-fainshtein"></a></li>
+              <li><a class="fa facebook" href="https://www.facebook.com/"></a></li>
+              <li><a class="fa github" href="https://github.com/RonaFain"></a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <main class="my-memes-container none">
+      <section class="meme-container main-layout grid"></section>
+    </main>
+
+    <main class="about-container none">
+      <section
+        class="
+          about-content
+          main-layout
+          flex flex-column
+          justify-center
+          align-center
+        "
+      >
+        <h2>Hello !!</h2>
+        <p>This website created by Rona Fainshtein</p>
+        <img src="imgs/web-design-meme.jpg" />
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div
+        class="
+          footer-container
+          main-layout
+          flex flex-column
+          space-between
+          align-center
+        "
+      >
+        <div class="footer-logo">memegen</div>
+        <small>all rights reserved 2021 ©</small>
+      </div>
+    </footer>
+
+    <div class="modal" style="display: none">
+      <span class="close-modal" onclick="onToggleModal()" title="Close">×</span>
+      <div class="modal-container">
+        <h2>Meme 😏</h2>
+        <p>Are you sure you want to save this meme?</p>
+        <div class="clearfix">
+          <button class="btn-yes" onclick="onSaveModal()">yes</button>
+          <button class="btn-no" onclick="onToggleModal()" >no</button>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <script src="js/service/utils.js"></script>
+    <script src="js/service/meme-storage.js"></script>
+    <script src="js/service/meme-service.js"></script>
+    <script src="js/editor-controller.js"></script>
+    <script src="js/meme-controller.js"></script>
+  </body>
+</html>
