@@ -12,7 +12,8 @@
     <div class="main-screen" onclick="onToggleMenu()"></div>
     <header class="main-header">
       <div class="header-container main-layout flex space-between align-center">
-        <div class="logo">memegen
+        <div class="flex">
+          <div class="logo" onclick="onOpenPage('gallery')">memegen</div>
           <select class="select-lang" onchange="onSetLang(this.value)">
             <option value="en">English</option>
             <option value="he">עברית</option>
@@ -153,8 +154,8 @@
             <input
               type="color"
               name="stroke-color"
-              value="#ffffff"
-              onchange="onChangeColor('stroke', this.value)"
+              value="#000000"
+              oninput="onChangeColor('stroke', this.value)"
             />
           </button>
           <button class="btn btn-font-color" title="Font color">
@@ -162,8 +163,8 @@
             <input
               type="color"
               name="font-color"
-              value="#ffffff"
-              onchange="onChangeColor('font', this.value)"
+              value="#000000"
+              oninput="onChangeColor('font', this.value)"
             />
           </button>
         </section>
@@ -223,7 +224,7 @@
           "
         >
           <div class="search-container">
-            <form class="search-form" onchange="onSearch(event)">
+            <form class="search-form" onsubmit="onSearch(event)">
               <input
                 list="search-words"
                 class="search"
@@ -233,7 +234,7 @@
                 data-trans="search-placeholder"
               />
               <datalist id="search-words"></datalist>
-              <button class="search-btn">
+              <button class="search-btn" type="button">
                 <img src="icons/search-icon.png" />
               </button>
             </form>

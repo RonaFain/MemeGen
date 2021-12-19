@@ -47,7 +47,8 @@ function renderMyMemes() {
 }
 
 function renderKeywords() {
-  const isViewAllKeys = document.querySelector('.btn-more').innerText === 'More...' ? false : true;
+  const isViewAllKeys =
+    document.querySelector('.btn-more').innerText === 'More...' ? false : true;
   const keywords = getKeywords(isViewAllKeys);
 
   let strHtmls = '';
@@ -182,7 +183,7 @@ function onDeleteMeme(memeId) {
 function onSetLang(lang) {
   setLang(lang);
   if (lang === 'he') document.body.classList.add('rtl');
-  else  document.body.classList.remove('rtl');
+  else document.body.classList.remove('rtl');
   onInit();
 }
 

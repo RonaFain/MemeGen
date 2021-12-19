@@ -9,7 +9,7 @@ function addListeners() {
   addMouseListeners();
   addTouchListeners();
   window.addEventListener('resize', () => {
-    // resizeCanvas();
+    resizeCanvas();
     renderCanvas();
   });
 }
@@ -39,10 +39,10 @@ function onDown(ev) {
   if (!isStickerClick && !isLineClick) return;
   if (isLineClick) setLineDrag(true);
   else setStickerDrag(true);
-  gStartPos = pos;
-  gElCanvas.style.cursor = 'grab';
   renderTextInput();
   renderCanvas();
+  gStartPos = pos;
+  gElCanvas.style.cursor = 'grab';
 }
 
 function onUp() {
@@ -80,10 +80,11 @@ function renderCanvas() {
     ? `${selectedImg.url}`
     : `imgs/imgs-square/${selectedImg.url}`;
   img.onload = () => {
+    resizeCanvas();
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
     drawText();
     if (!gIsMemeSave) {
-      drawBorder();
+      // drawBorder();
       drawStickerBorder();
     }
     renderTextInput();
@@ -120,7 +121,7 @@ function renderStickers() {
 function drawText() {
   const lines = getLines();
   if (!lines) return;
-  lines.forEach((line) => {
+  lines.forEach((line, idx) => {
     const txt = line.txt;
     gCtx.lineWidth = 2;
     gCtx.textBaseline = 'top';
@@ -131,6 +132,11 @@ function drawText() {
       gCtx.strokeStyle = line.stroke;
       gCtx.fillText(txt, line.pos.x, line.pos.y);
       gCtx.strokeText(txt, line.pos.x, line.pos.y);
+  
+      const selectedLine = getLine();
+      if(line === selectedLine && !gIsMemeSave) {
+        drawBorder();
+      }
     });
   });
 }
@@ -140,7 +146,7 @@ function drawBorder() {
   if (!line) return;
   gCtx.beginPath();
   gCtx.rect(
-    line.pos.x - gCtx.measureText(line.txt).width / 2 - 10,
+    line.pos.x - (gCtx.measureText(line.txt).width) / 2 - 10,
     line.pos.y - 10,
     gCtx.measureText(line.txt).width + 20,
     line.size + 20

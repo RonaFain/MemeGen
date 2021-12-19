@@ -111,6 +111,7 @@ body.rtl .search-form .search-btn {
 
 .main-header .logo {
   color: #fff;
+  cursor: pointer;
 }
 
 .logo {
@@ -130,6 +131,7 @@ body.rtl .search-form .search-btn {
 
 .editor-container .canvas-container {
   width: 75%;
+  height: 100%;
 }
 
 .canvas-container .canvas {
@@ -695,6 +697,9 @@ body.menu-open .main-screen {
 @media (max-width: 820px) {
   .btn-menu {
     cursor: pointer;
+    background-color: #e3e3e3;
+    border-radius: 6px;
+    font-size: 1.1rem;
   }
 
   .main-nav ul {

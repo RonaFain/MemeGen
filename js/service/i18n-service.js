@@ -95,7 +95,6 @@ function doTrans() {
 
   els.forEach((el) => {
     const transKey = el.dataset.trans;
-    console.log('tranKey', transKey);
     if (el.nodeName === 'INPUT') {
       el.placeholder = getTrans(transKey);
     } else {

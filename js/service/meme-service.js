@@ -217,7 +217,7 @@ function resetCanvas() {
 
 function fillterBySearch(word) {
   gFillterWord = word;
-  if (word !== 'all') {
+  if (word !== 'all' && gKeywords[word] <= 25) {
     gKeywords[word]++;
   }
 }
@@ -263,9 +263,9 @@ function isStickerClicked(clickedPos) {
     const stickerWidth = 50; // I choose 50px on drawImg
     return (
       clickedPos.x >= sticker.pos.x - stickerWidth / 2 &&
-      clickedPos.x <= sticker.pos.x + stickerWidth / 2 &&
+      clickedPos.x <= sticker.pos.x + stickerWidth / 2 + sticker.size &&
       clickedPos.y >= sticker.pos.y - stickerWidth / 2 &&
-      clickedPos.y <= sticker.pos.y + stickerWidth / 2
+      clickedPos.y <= sticker.pos.y + stickerWidth / 2 + sticker.size
     );
   });
   if (clickedStickerIdx !== -1) {
@@ -341,7 +341,7 @@ function _createLine(font, numNewLine) {
     txt: '',
     size: 40,
     align: 'center',
-    color: 'black',
+    color: 'white',
     stroke: 'black',
     font,
     pos: { x: newPos.x, y: newPos.y },
